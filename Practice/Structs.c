@@ -2,10 +2,10 @@
 #include <string.h>
 
 struct adress{
-    char = country;
-    char = province;
-    char = city;
-    int = housenum[192];
+    char = country[20];
+    char = province[30];
+    char = city[30];
+    int = housenum[20];
 };
 
 void printadress(struct address ad);
