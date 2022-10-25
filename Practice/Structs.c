@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-
+//The char [] determines the maximum amount of characters outputted
 struct adress{
     char = country[20];
     char = province[30];
