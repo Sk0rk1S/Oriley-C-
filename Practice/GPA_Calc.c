@@ -1,5 +1,6 @@
 #include <stdio.h>
 //First thing Ive ever coded that kinda works March 12 2025!!!
+//Yes it does accurately calculate your GPA based on your percentages!
 int main() {
   int grade;
   int classes;
