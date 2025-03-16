@@ -1,6 +1,10 @@
 #include <stdio.h>
 //First thing Ive ever coded that kinda works March 12 2025!!!
 //Yes it does accurately calculate your GPA based on your percentages!
+//Edit I was wrong it doesnt
+
+//OLD CODE BELOW
+/*
 int main() {
   int grade;
   int classes;
@@ -25,3 +29,4 @@ int main() {
   float gpa = sum / divideBy;
   printf("Your average GPA is %f\n", gpa);
 }
+*/
