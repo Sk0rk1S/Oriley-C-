@@ -2,20 +2,20 @@
 //First thing Ive ever coded that kinda works March 12 2025!!!
 //Yes it does accurately calculate your GPA based on your percentages!
 //Edit I was wrong it doesnt
-
-int iteration(int grade){
-    int n0, n;
+//Ok it works now 
+float iteration(int grade){
+    float n0, n;
     n0 = 100 - grade;
     n = n0 / 5.22;
     return n;
 }
 
-//OLD CODE BELOW
-/*
+
 int main() {
-  int grade, classes, tempgrade1, tempgrade2;
-  int sum = 0;
-  float gpa = 0;
+int grade, classes;
+float tempgrade1, tempgrade2;
+float sum = 0;
+float gpa = 0;
 
   printf("enter classes\n");
   scanf("%d", & classes);
@@ -36,4 +36,4 @@ int main() {
   gpa = sum / classes;
   printf("Your average GPA is %f\n", gpa);
 }
-*/
+
