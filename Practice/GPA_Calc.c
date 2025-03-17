@@ -3,6 +3,13 @@
 //Yes it does accurately calculate your GPA based on your percentages!
 //Edit I was wrong it doesnt
 
+int iteration(int grade){
+    int n0, n;
+    n0 = 100 - grade;
+    n = n0 / 5.22;
+    return n;
+}
+
 //OLD CODE BELOW
 /*
 int main() {
