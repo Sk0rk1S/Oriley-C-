@@ -15,7 +15,7 @@ int iteration(int grade){
 int main() {
   int grade, classes, tempgrade1, tempgrade2;
   int sum = 0;
-  float divideBy = 0;
+  float gpa = 0;
 
   printf("enter classes\n");
   scanf("%d", & classes);
@@ -29,10 +29,11 @@ int main() {
     else if(grade < 50){
       grade = 0;
     }
-    sum += grade;
-    divideBy += 23.3;
+    tempgrade1 = 23.3 + (0.33 * iteration(grade));
+    tempgrade2 = grade/tempgrade1;
+    sum += tempgrade2;
   }
-  float gpa = sum / divideBy;
+  gpa = sum / classes;
   printf("Your average GPA is %f\n", gpa);
 }
 */
