@@ -13,8 +13,7 @@ int iteration(int grade){
 //OLD CODE BELOW
 /*
 int main() {
-  int grade;
-  int classes;
+  int grade, classes, tempgrade1, tempgrade2;
   int sum = 0;
   float divideBy = 0;
 
