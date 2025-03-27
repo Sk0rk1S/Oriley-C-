@@ -13,6 +13,7 @@ HOLY FUCKING SHIT IT WORKS A<SJFGAWKYGDUAYDFBUK */
 //b(4) = a(13) assign a val to b
 
 //a(13) = e(d) assign d to a
+#include <stdio.h>
 
 int twoYearOldProblem(int x){
   int a = 4;
