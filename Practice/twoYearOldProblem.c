@@ -6,13 +6,13 @@ but now I realized I'm able to solve this via programming
 as its similar to the Fibonacci sequence algorithm...
 HOLY FUCKING SHIT IT WORKS A<SJFGAWKYGDUAYDFBUK */
 
-//a - b = 9 (c) c is equal to a - b
+//a(13) - b(4) = c(9) c is equal to a - b
 
-//a + (9(c) x 3)) = 40(d) d is equal to a + difference x 3
+//a(13) + c(9) * 3 = d(40) d is equal to a + difference(c) times 3
 
 //b(4) = a(13) assign a val to b
 
-//a(13) = e(d) assign d to a
+//a(13) = d(40) assign d to a
 #include <stdio.h>
 
 int twoYearOldProblem(int x){
