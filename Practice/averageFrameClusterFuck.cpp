@@ -72,7 +72,7 @@ void appendAverage(unsigned int sum, int& innerIndex, int& outerIndex, double av
 
 void getEuclidean(const int arr[3][3][3], int size, const double averageF[3][3], int& bestIndex)
 {
-    std::cout << "EUCLIDEAN DISTANCE FOR EACH FRAME: \n";
+    //std::cout << "EUCLIDEAN DISTANCE FOR EACH FRAME: \n";
     double tempSum = 0;
     double minSum = 0;
 
@@ -91,7 +91,7 @@ void getEuclidean(const int arr[3][3][3], int size, const double averageF[3][3],
             }
             //std::cout << "\n";
         }
-        std::cout << "\n\n";
+        //std::cout << "\n\n";
     }
 
     //After minSum is initialized, we can now start to find the median frame
@@ -112,7 +112,7 @@ void getEuclidean(const int arr[3][3][3], int size, const double averageF[3][3],
             }
             //std::cout << "\n";
         }
-        std::cout << "\n\n";
+        //std::cout << "\n\n";
     }
 }
 
@@ -120,6 +120,7 @@ void getEuclidean(const int arr[3][3][3], int size, const double averageF[3][3],
 //bestIndex should contain the location of the median frame.
 void test(const int arr[3][3][3], int size, int& bestIndex)
 {
+    std::cout << "\n";
     std::cout << "THE BEST FRAME IS: \n";
     for(int i = bestIndex; i < bestIndex + 1; i++) //Because we only want the outermost for loop to run once
     {
