@@ -1,6 +1,9 @@
 ## WHAT THE HELL DOES THIS CODE EVEN DO???
 ### Explaining what my clusterfuck of a code is doing
 
+You may have seen a file called:
+averageFrameClusterFuck.cpp and are wondering what it does
+
 Short answer:
 The code chooses a frame that is closest to the average frame.
 
