@@ -64,7 +64,7 @@ void appendAverage(unsigned int sum, int& innerIndex, int& outerIndex, double av
     {
         for(int j = innerIndex; j < innerIndex + 1; j++)
         {
-            averageF[i][j] = (double)sum / 3;
+            averageF[i][j] = (double)sum / 3; //We want to get the average of 3 frames so we use "3"
             std::cout << averageF[i][j] << " ";
         }
     }
