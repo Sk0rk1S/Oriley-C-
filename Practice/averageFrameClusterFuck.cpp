@@ -16,8 +16,8 @@ int main()
     int bestIndex;
 
     double averageF[3][3] = {0};
-    double tempFrame[3][3] = {0}; //Temporary frame so we can add up the total euclidean distance, then move onto the next frame
-    double tempMin = 0;
+    //double tempFrame[3][3] = {0}; //Temporary frame so we can add up the total euclidean distance, then move onto the next frame
+    //double tempMin = 0;
     
     //True median
     getAverageF(arr, averageF, size); //Fills up the averageF array after calling
