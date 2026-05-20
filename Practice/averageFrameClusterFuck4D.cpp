@@ -125,10 +125,12 @@ void getBestFrame(const int arr[3][3][3][3], const double averageF[3][3][3], int
                 {
                     minsum = tempsum;
                     bestIndex = i;
-                    std::cout << "The best index is now at: " << bestIndex << "\n";
+                    //std::cout << "The best index is now at: " << bestIndex << "\n"; For testing purposes
                 }
+                /* For testing purposes
                 std::cout << "minSum is: " << minsum << "\n";
                 std::cout << "tempSum is: " << tempsum << "\n";
+                */
                 tempsum = 0;
             }
         }
