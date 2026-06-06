@@ -1,13 +1,13 @@
 #include <iostream>
 #include <cmath>
-/*
-DOES EXACTLY THE SAME SHIT AS averageFrameClusterFuck.cpp (which was 3D) BUT IN 4D
-Each frame consists of 3 layers, R, G, B instead of 1 layer like averageFrameClusterFuck.cpp
-*/
+/* DOES EXACTLY THE SAME SHIT AS averageFrameClusterFuck.cpp (which was 3D) BUT IN 4D
+Each frame consists of 3 layers, R, G, B instead of 1 layer like averageFrameClusterFuck.cpp */
+
 void getAverage(const int arr[3][3][3][3], double averageF[3][3][3], int size);
-void appendToAverageF(double averageF[3][3][3], int sum, int& innerLoop, int& midLoop, int& outerLoop);
-void getBestFrame(const int arr[3][3][3][3], const double averageF[3][3][3], int size, int& bestIndex);
-void printArray(const int arr[3][3][3][3], int size, int bestIndex);
+void appendToAverage(double averageF[3][3][3], int rSum, int gSum, int bSum, int& outerLoop, int& innerLoop);
+//void test(double averageF[3][3][3]);
+void getBestFrame(const double averageF[3][3][3], const int arr[3][3][3][3], int& bestIndex);
+void printBestFrame(const int arr[3][3][3][3], int bestIndex);
 
 int main()
 {
@@ -20,139 +20,155 @@ int main()
                            {{28, 103, 206, 131, 218, 165, 204, 155, 107}, //Frame 3 start
                            {161, 118, 137, 124, 67, 118, 238, 193, 6},
                            {28, 204, 174, 246, 229, 227, 250, 182, 251}}};
+
     int bestIndex = 0;
     int size = 3; //How long each column is
     double averageF[3][3][3] = {0};
 
-    //Fills up the averageF array after calling getAverage()
     getAverage(arr, averageF, size); 
-
-    //printArray(averageF, size);
-    //KNN
-
-    //Finds the best frame that has the smallest distance from the average frame
-    getBestFrame(arr, averageF, size, bestIndex); 
-
-    printArray(arr, size, bestIndex);
+    getBestFrame(averageF, arr, bestIndex);
+    //test(averageF);
+    std::cout << "The best frame is at index: " << bestIndex << "\n";
+    printBestFrame(arr, bestIndex);
 }
 
 void getAverage(const int arr[3][3][3][3], double averageF[3][3][3], int size)
 {
-    int sum = 0;
+    int rSum = 0;
+    int gSum = 0;
+    int bSum = 0;
+
     int innerLoop = 0;
-    int midLoop = 0;
     int outerLoop = 0;
 
-    for(int i = 0; i < size; i++)
+    for(int i = 0; i < 3; i++) //How many frames there are
     {
         //std::cout << " NEW COLOR: " << "\n\n\n";
-        for(int j = 0; j < size; j++)
+        for(int j = 0; j < 3; j++) 
         {
-            for(int k = 0; k < size; k++)
+            for(int k = 0; k < 3; k++)
             {
-                for(int l = 0; l < size; l++)
-                {
-                    sum += arr[l][i][j][k];
-                }
-                //std::cout << "\n SUM UP THESE NUMBERS ABOVE"; 
-                appendToAverageF(averageF, sum, innerLoop, midLoop, outerLoop);//Append to averageF array
-                innerLoop++;//Increment inner for loop of averageF
-                sum = 0; //REMEMBER TO RESET SUM TO ZERO ASWELL FOR FUCKS SAKESs
+                /*
+                std::cout << "RED: " << arr[k][0][j][i] << "\n"; //[k][0]
+                std::cout << "GREEN: " << arr[k][1][j][i] << "\n";
+                std::cout << "BLUE: " << arr[k][2][j][i] << "\n";
+                */
+               //This is traversing vertically btw
+               rSum += arr[k][0][j][i];
+               gSum += arr[k][1][j][i];
+               bSum += arr[k][2][j][i];
             }
-            innerLoop = 0;//Reset inner loop
-            midLoop++;//Increment middle for loop of averageF
-            //std::cout << "\n";
+            appendToAverage(averageF, rSum, gSum, bSum, outerLoop, innerLoop);
+            /*
+            std::cout << (double)rSum/3 << "\n";
+            std::cout << (double)gSum/3 << "\n";
+            std::cout << (double)bSum/3 << "\n";
+            std::cout << "\n";
+            */
+            innerLoop++;
+            rSum = 0;
+            gSum = 0;
+            bSum = 0;
         }
-        midLoop = 0;//Reset midloop
-        outerLoop++;//Increment outermost for loop of averageF
+        innerLoop = 0;
+        outerLoop++;
+    }
+} 
+
+
+void appendToAverage(double averageF[3][3][3], int rSum, int gSum, int bSum, int& outerLoop, int& innerLoop)
+{
+    int total_number_of_frames = 3;
+
+    for(int i = outerLoop; i < outerLoop + 1; i++)
+    {
+        for(int j = innerLoop; j < innerLoop + 1; j++)
+        {
+            /*
+            std::cout << "0 " << i << " " << j << "       ";
+            std::cout << double(rSum)/3;
+            std::cout << "\n";
+            */
+           //This is traversing vertically btw
+           averageF[0][i][j] = double(rSum)/total_number_of_frames;
+           averageF[1][i][j] = double(gSum)/total_number_of_frames;
+           averageF[2][i][j] = double(bSum)/total_number_of_frames;
+        }
     }
 }
 
 /*
-appends the values from getAverage to the averageF[3][3][3] array
-*/
-
-void appendToAverageF(double averageF[3][3][3], int sum, int& innerLoop, int& midLoop, int& outerLoop)
+void test(double averageF[3][3][3])
 {
-    //We only want these loops to run once
-    for(int i = outerLoop; i < outerLoop + 1; i++)
+    for(int i = 0; i < 3; i++)
     {
-        for(int j = midLoop; j < midLoop + 1; j++)
+        for(int j = 0; j < 3; j++)
         {
-            for(int k = innerLoop; k < innerLoop + 1; k++)
+            for(int k = 0; k < 3; k++)
             {
-                averageF[i][j][k] = (double)sum / 3;
-            }
-        }
-    }
-}
-
-void getBestFrame(const int arr[3][3][3][3], const double averageF[3][3][3], int size, int& bestIndex)
-{
-    double minsum = 0;
-    double tempsum = 0;
-
-    /*
-    This first quadruple for loop is to initialize minSum
-    */
-    for(int i = 0; i < 1; i++)
-    {
-        for(int j = 0; j < size; j++)
-        {
-            for(int k = 0; k < size; k++)
-            {
-                for(int l = 0; l < size; l++)
-                {
-                    minsum += std::abs(arr[i][j][k][l] - averageF[j][k][l]);
-                }
-            }
-        }
-    }
-
-    //After minSum is initialized, we can now start to find the median frame
-    //The frame that has the least total euclidean distance will be the frame selected.
-    for(int i = 0; i < size; i++)
-    {
-        for(int j = 0; j < size; j++)
-        {
-            for(int k = 0; k < size; k++)
-            {
-                for(int l = 0; l < size; l++)
-                {
-                    tempsum += std::abs(arr[i][j][k][l] - averageF[j][k][l]);
-                }
-                if(tempsum < minsum)
-                {
-                    minsum = tempsum;
-                    bestIndex = i;
-                    //std::cout << "The best index is now at: " << bestIndex << "\n"; For testing purposes
-                }
-                /* For testing purposes
-                std::cout << "minSum is: " << minsum << "\n";
-                std::cout << "tempSum is: " << tempsum << "\n";
-                */
-                tempsum = 0;
-            }
-        }
-    }
-}
-
-//Prints the array that was selected
-void printArray(const int arr[3][3][3][3], int size, int bestIndex)
-{
-    for(int i = bestIndex; i < bestIndex + 1; i++)
-    {
-        for(int j = 0; j < size; j++)
-        {
-            for(int k = 0; k < size; k++)
-            {
-                for(int l = 0; l < size; l++)
-                {
-                    std::cout << arr[i][j][k][l] << "  ";
-                }
+                std::cout << averageF[i][j][k] << " ";
             }
             std::cout << "\n";
         }
-        std::cout << "\n";
+        std::cout << "\n\n";
+    }
+}
+*/
+
+void getBestFrame(const double averageF[3][3][3], const int arr[3][3][3][3], int& bestIndex) //I FORGOT TO PASS BESTINDEX BY REFERENCE FUCKKKCKCKKCKCKKC
+{
+    double minSum = 0;
+    double tempMinSum = 0;
+
+    /*Initializing minSum*/
+    for(int i = 0; i < 1; i++)
+    {
+        for(int j = 0; j < 3; j++)
+        {
+            for(int k = 0; k < 3; k++)
+            {
+                // std::cout << arr[i][0][k][j] << " "; //n'th frames red location
+                // std::cout << arr[i][1][k][j] << " "; //n'th frames green location
+                // std::cout << arr[i][2][j][k] << " "; //n'th frames blue location
+                // std::cout << averageF[0][j][k] << " ";
+                minSum += (std::abs(arr[i][0][k][j] - averageF[0][j][k]) + std::abs(arr[i][1][k][j] - averageF[1][j][k]) + std::abs(arr[i][2][k][j] - averageF[2][j][k]));
+            }
+        }
+        //std::cout << "minSum is: " << minSum << "\n";
+    }
+    
+    for(int i = 0; i < 3; i++)
+    {
+        for(int j = 0; j < 3; j++)
+        {
+            for(int k = 0; k < 3; k++)
+            {
+                tempMinSum += (std::abs(arr[i][0][k][j] - averageF[0][j][k]) + std::abs(arr[i][1][k][j] - averageF[1][j][k]) + std::abs(arr[i][2][k][j] - averageF[2][j][k]));
+            }
+        }
+        if(tempMinSum < minSum) //OK APPARENTLY I NEEDED TO DO THIS ON THE MID FOR LOOP OMFG
+        {
+            minSum = tempMinSum;
+            bestIndex = i;
+        }
+        tempMinSum = 0;
+    }
+}
+
+void printBestFrame(const int arr[3][3][3][3], int bestIndex)
+{
+    for(int i = bestIndex; i < bestIndex + 1; i++)
+    {
+        for(int j = 0; j < 3; j++)
+        {
+            for(int k = 0; k < 3; k++)
+            {
+                for(int l = 0; l < 3; l++)
+                {
+                    std::cout << arr[i][j][k][l] << " ";
+                }
+                std::cout << "\n";
+            }
+        }
     }
 }
