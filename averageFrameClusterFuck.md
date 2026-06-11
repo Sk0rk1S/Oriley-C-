@@ -14,7 +14,7 @@ The code chooses a frame that is closest to the average frame.
 
 -Average frame of all of them, just means that I got the average value of each position in the 3d array
 For example:
-I got 7.66 because I summed up 6, 10, 7 and multiplied the result by 3
+I got 7.66 because I summed up 6, 10, 7 and divided the result by 3
 
 -The distances (Euclidean), is finding the distance of each position in the 3d array from the average value of said position.
 For example:
