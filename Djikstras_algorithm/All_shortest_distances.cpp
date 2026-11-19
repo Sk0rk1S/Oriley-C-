@@ -7,6 +7,7 @@
 //Returns an array of the shortest path from source vertex to every other vertex in the graph
 std::vector<int> dijkstra(int n, std::vector<int> edges, int source) {  
     std::vector<int> distances(n, INT_MAX);
+    distances[source] = 0;
     std::vector<std::vector<std::pair<int, int>>> graph(n);
     //Making the adjacency list of vectors that store the edge aswell as the weight
     for(int i = 0; i < edges.size(); i+=3)
@@ -20,10 +21,10 @@ std::vector<int> dijkstra(int n, std::vector<int> edges, int source) {
     }
 
     std::priority_queue<std::pair<int, int>> pq;
-    distances[source] = 0;
     //Because std::priority queue will use the first parameter to base it's priority
     //The first part of the pair must always be the weight lol
-    pq.push(std::make_pair(distances[source], source));
+    //The distance from source to itself is always 0 lol
+    pq.push(std::make_pair(0, source));
 
     while(!pq.empty())
     {
