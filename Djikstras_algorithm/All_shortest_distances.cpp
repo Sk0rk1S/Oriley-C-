@@ -8,7 +8,7 @@ std::vector<int> dijkstra(int n, std::vector<int> edges, int source) {
     std::vector<int> distances(n, INT_MAX);
     distances[source] = 0;
     std::vector<std::vector<std::pair<int, int>>> graph(n);
-    //Making the adjacency list of vectors that store the edge aswell as the weight
+    //Making the adjacency list of vectors that stores the edge aswell as the weight
     for(int i = 0; i < edges.size(); i+=3)
     {
         //Because there is already a variable named source...
